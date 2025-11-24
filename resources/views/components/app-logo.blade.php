@@ -1,6 +1,7 @@
-<div class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-    <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
+<div class="flex aspect-square size-9 items-center justify-center rounded-2xl bg-gradient-to-br from-[#d8b4fe] to-[#7c3aed] text-white shadow-lg shadow-purple-900/40">
+    <x-app-logo-icon class="size-6 fill-current text-white" />
 </div>
-<div class="ms-1 grid flex-1 text-start text-sm">
-    <span class="mb-0.5 truncate leading-tight font-semibold">Laravel Starter Kit</span>
+<div class="ms-3 flex flex-col justify-center text-start leading-tight text-sm text-white">
+    <span class="text-xs font-semibold uppercase tracking-[0.3em]">Crochet</span>
+    <span class="text-lg font-semibold">Inventory System</span>
 </div>

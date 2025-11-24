@@ -1,147 +1,234 @@
-<x-layouts.app :title="__('Dashboard')">
-    <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
+<x-layouts.app :title="__('Crochetel Studio')">
+    <style>[x-cloak]{display:none!important;}</style>
 
-    @if(session('success'))
-        <div class="rounded-lg bg-green-100 p-4 text-green-700 dark:bg-green-900/30 dark:text-green-300">
-            {{ session('success') }}
-        </div>
-    @endif
-        <!-- Stats Cards -->
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Total Students</p>
-                        <h3 class="mt-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100">{{ $students->count() }}</h3>
-                    </div>
-                    <div class="rounded-full bg-blue-100 p-3 dark:bg-blue-900/30">
-                        <svg class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                    </div>
+    <div class="space-y-6 text-white">
+        @if(session('success'))
+            <div class="rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <section class="rounded-3xl border border-white/10 bg-gradient-to-r from-[#22103e] via-[#2f1b5f] to-[#3c0d67] p-6 shadow-[0_35px_120px_rgba(15,0,30,0.6)] lg:p-8">
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                <div>
+                    <h1 class="text-3xl font-semibold sm:text-4xl">Dashboard</h1>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-white/10 px-6 py-4 text-sm text-white/80">
+                    <p class="uppercase tracking-[0.35em] text-white/50">Today</p>
+                    <p class="text-lg font-semibold">{{ now()->format('l, F j') }}</p>
                 </div>
             </div>
 
-            <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-800">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Active Courses</p>
-                        <h3 class="mt-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100">12</h3>
+            <div class="mt-8 grid gap-4 md:grid-cols-3">
+                <div class="rounded-2xl border border-white/5 bg-white/5 p-5 shadow-inner shadow-purple-900/30">
+                    <p class="text-xs uppercase tracking-[0.35em] text-white/60">Crochet Works</p>
+                    <div class="mt-4 flex items-end justify-between">
+                        <span class="text-4xl font-semibold">{{ $stats['works'] }}</span>
                     </div>
-                    <div class="rounded-full bg-green-100 p-3 dark:bg-green-900/30">
-                        <svg class="h-6 w-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
+                </div>
+                <div class="rounded-2xl border border-white/5 bg-white/5 p-5 shadow-inner shadow-pink-900/30">
+                    <p class="text-xs uppercase tracking-[0.35em] text-white/60">Collections</p>
+                    <div class="mt-4 flex items-end justify-between">
+                        <span class="text-4xl font-semibold">{{ $stats['collections'] }}</span>
+                    </div>
+                </div>
+                <div class="rounded-2xl border border-white/5 bg-white/5 p-5 shadow-inner shadow-indigo-900/30">
+                    <p class="text-xs uppercase tracking-[0.35em] text-white/60">Stocks</p>
+                    <div class="mt-4 flex items-end justify-between">
+                        <span class="text-4xl font-semibold">{{ $stats['stockTotal'] }}</span>
+                        <span class="text-sm text-white/60">{{ $stats['lowStock'] }} low</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="relative overflow-hidden rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-800">
+        <section class="grid gap-6 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)]">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_25px_60px_rgba(5,0,15,0.8)]">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Enrollment Rate</p>
-                        <h3 class="mt-2 text-3xl font-bold text-neutral-900 dark:text-neutral-100">94%</h3>
+                        <p class="text-xs uppercase tracking-[0.35em] text-white/50">New Crochet Work</p>
+                        <h2 class="mt-2 text-xl font-semibold">Add Inventory</h2>
                     </div>
-                    <div class="rounded-full bg-purple-100 p-3 dark:bg-purple-900/30">
-                        <svg class="h-6 w-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                    </div>
+                    <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/70">Real-time</span>
                 </div>
+
+                <form action="{{ route('products.store') }}" method="POST" class="mt-6 space-y-4">
+                    @csrf
+                    <div class="space-y-2">
+                        <label class="text-sm text-white/70">Name</label>
+                        <input type="text" name="name" value="{{ old('name') }}" placeholder="Luna Shell Blanket" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                        @error('name','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="space-y-2">
+                            <label class="text-sm text-white/70">Price</label>
+                            <input type="number" min="0" step="0.01" name="price" value="{{ old('price') }}" placeholder="0.00" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                            @error('price','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm text-white/70">Stock</label>
+                            <input type="number" min="0" name="stock" value="{{ old('stock') }}" placeholder="0" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                            @error('stock','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm text-white/70">Material</label>
+                        <input type="text" name="material" value="{{ old('material') }}" placeholder="Merino blend" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                        @error('material','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm text-white/70">Collection</label>
+                        <select name="category_id" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">
+                            <option value="">Unassigned</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm text-white/70">Description</label>
+                        <textarea name="description" rows="3" placeholder="Stitch story, palette, or packaging notes" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500/40">{{ old('description') }}</textarea>
+                        @error('description','createProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                    </div>
+                    <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-[#c084fc] to-[#7c3aed] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.35em] text-white shadow-lg shadow-purple-900/50 transition hover:opacity-90">
+                        Save Work
+                    </button>
+                </form>
             </div>
-        </div>
 
-        <!-- Student Management Section -->
-        <div class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-800">
-            <div class="flex h-full flex-col p-6">
-                <!-- Add New Student Form -->
-                <div class="mb-6 rounded-lg border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-700 dark:bg-neutral-900/50">
-                    <h2 class="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Add New Student</h2>
-                    <form action="{{ route('students.store') }}" method="POST" class="grid gap-4 md:grid-cols-2">
-                        @csrf
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter student name" required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
-                            @error('name') 
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</label>
-                            <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter email address" required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
-                            @error('email') 
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Phone</label>
-                            <input type="tel" name="phone" value="{{ old('phone') }}" placeholder="Enter phone number" required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
-                            @error('phone') 
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Address</label>
-                            <input type="text" name="address" value="{{ old('address') }}" placeholder="Enter address" required class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100">
-                            @error('address') 
-                                <p class="mt-1 text-xs text-red-600 dark:text-red-400">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="md:col-span-2">
-                            <button type="submit" class="rounded-lg bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
-                                Add Student
-                            </button>
-                        </div>
-                    </form>
+            <div class="rounded-3xl border border-white/10 bg-[#0c031b]/80 p-4 shadow-[0_35px_120px_rgba(5,0,10,0.9)] sm:p-6">
+                <div class="flex flex-col gap-2 border-b border-white/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.35em] text-white/50">Live Inventory</p>
+                        <h2 class="text-2xl font-semibold">Crochet Works</h2>
+                    </div>
+                    <span class="text-sm text-white/60">Last sync {{ now()->format('g:i A') }}</span>
                 </div>
-
-                <!-- Student List Table -->
-                <div class="flex-1 overflow-auto">
-                    <h2 class="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">Student List</h2>
-                    <div class="overflow-x-auto">
-                        <table class="w-full min-w-full">
-                            <thead>
-                                <tr class="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900/50">
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">#</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Name</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Email</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Phone</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Address</th>
-                                    <th class="px-4 py-3 text-left text-sm font-semibold text-neutral-700 dark:text-neutral-300">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-700">
-                                @forelse($students as $student)
-                                <tr class="transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
-                                    <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $loop->iteration }}</td>
-                                    <td class="px-4 py-3 text-sm text-neutral-900 dark:text-neutral-100">{{ $student->name }}</td>
-                                    <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->email }}</td>
-                                    <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->phone }}</td>
-                                    <td class="px-4 py-3 text-sm text-neutral-600 dark:text-neutral-400">{{ $student->address }}</td>
+                <div class="overflow-x-auto">
+                    <table class="mt-4 min-w-full text-left text-sm">
+                        <thead class="text-xs uppercase tracking-[0.3em] text-white/40">
+                            <tr class="border-b border-white/10">
+                                <th class="px-4 py-2">#</th>
+                                <th class="px-4 py-2">Work</th>
+                                <th class="px-4 py-2">Collection</th>
+                                <th class="px-4 py-2">Price</th>
+                                <th class="px-4 py-2">Stock</th>
+                                <th class="px-4 py-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            @forelse($products as $product)
+                                <tr class="transition hover:bg-white/5">
+                                    <td class="px-4 py-3 text-white/50">{{ $loop->iteration }}</td>
+                                    <td class="px-4 py-3">
+                                        <p class="font-semibold">{{ $product->name }}</p>
+                                        <p class="text-xs text-white/50">
+                                            {{ $product->material ?? 'Crafted piece' }}
+                                        </p>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-white/80">
+                                            {{ $product->category->name ?? 'N/A' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-4 py-3 text-white/80">₱ {{ number_format($product->price, 2) }}</td>
+                                    <td class="px-4 py-3">
+                                        <span class="rounded-full px-3 py-1 text-xs {{ $product->stock < 5 ? 'bg-orange-500/20 text-orange-200' : 'bg-emerald-500/20 text-emerald-100' }}">
+                                            {{ $product->stock }} pcs
+                                        </span>
+                                    </td>
                                     <td class="px-4 py-3 text-sm">
-                                        <button class="text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Edit</button>
-                                        <span class="mx-1 text-neutral-400">|</span>
-                                        <form method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this student?)">
-                                            @csrf
-                                            @method('DELETE')
-                                            
-                                            <button type="submit" class="text-red-600 transition-colors hover:text-red-700 dark:text-red-400 dark:hover:text-red-300">Delete</button>
-                                        </form>
+                                        <div x-data="{ openEdit: false, openDelete: false }" class="flex items-center gap-3">
+                                            <button type="button" @click="openEdit = true" class="text-purple-300 hover:text-white">Edit</button>
+                                            <button type="button" @click="openDelete = true" class="text-rose-300 hover:text-white">Delete</button>
+
+                                            <div x-cloak x-show="openEdit" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+                                                <div class="w-full max-w-2xl rounded-3xl border border-white/10 bg-[#0b001a] p-6 shadow-2xl">
+                                                    <div class="mb-4 flex items-center justify-between">
+                                                        <h3 class="text-xl font-semibold">Edit Crochet Work</h3>
+                                                        <button type="button" class="text-white/50 hover:text-white" @click="openEdit = false">✕</button>
+                                                    </div>
+                                                    <form action="{{ route('products.update', $product) }}" method="POST" class="grid gap-4 md:grid-cols-2">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="space-y-2">
+                                                            <label class="text-sm text-white/70">Name</label>
+                                                            <input type="text" name="name" value="{{ $product->name }}" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
+                                                            @error('name','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="space-y-2">
+                                                            <label class="text-sm text-white/70">Price</label>
+                                                            <input type="number" name="price" min="0" step="0.01" value="{{ $product->price }}" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
+                                                            @error('price','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="space-y-2">
+                                                            <label class="text-sm text-white/70">Stock</label>
+                                                            <input type="number" name="stock" min="0" value="{{ $product->stock }}" required class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
+                                                            @error('stock','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="space-y-2">
+                                                            <label class="text-sm text-white/70">Material</label>
+                                                            <input type="text" name="material" value="{{ $product->material }}" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
+                                                            @error('material','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="space-y-2">
+                                                            <label class="text-sm text-white/70">Collection</label>
+                                                            <select name="category_id" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
+                                                                <option value="">Unassigned</option>
+                                                                @foreach($categories as $categoryOption)
+                                                                    <option value="{{ $categoryOption->id }}" @selected($product->category_id === $categoryOption->id)>{{ $categoryOption->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('category_id','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="md:col-span-2 space-y-2">
+                                                            <label class="text-sm text-white/70">Description</label>
+                                                            <textarea name="description" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">{{ $product->description }}</textarea>
+                                                            @error('description','updateProduct')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
+                                                        </div>
+                                                        <div class="md:col-span-2 flex items-center justify-end gap-3 pt-2">
+                                                            <button type="button" @click="openEdit = false" class="rounded-2xl border border-white/10 px-4 py-2 text-sm text-white/70">Cancel</button>
+                                                            <button type="submit" class="rounded-2xl bg-gradient-to-r from-[#c084fc] to-[#7c3aed] px-6 py-2 text-sm font-semibold uppercase tracking-[0.35em]">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <div x-cloak x-show="openDelete" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
+                                                <div class="w-full max-w-md rounded-3xl border border-white/10 bg-[#0b001a] p-6 text-center shadow-2xl">
+                                                    <h3 class="text-xl font-semibold text-white">Remove crochet work?</h3>
+                                                    <p class="mt-2 text-sm text-white/70">
+                                                        {{ $product->name }} will disappear from the studio but any linked orders remain untouched.
+                                                    </p>
+                                                    <div class="mt-6 flex items-center justify-center gap-3">
+                                                        <button type="button" @click="openDelete = false" class="rounded-2xl border border-white/10 px-4 py-2 text-sm text-white/70">
+                                                            Cancel
+                                                        </button>
+                                                        <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Delete this crochet work?')" class="inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="rounded-2xl bg-gradient-to-r from-rose-500 to-orange-500 px-5 py-2 text-sm font-semibold text-white">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="px-4 py-8 text-center text-sm text-neutral-500 dark:text-neutral-400">
-                                        No students found. Add your first student above!
-
+                                    <td colspan="6" class="px-4 py-10 text-center text-sm text-white/60">
+                                        No crochet works yet. Use the form on the left to craft your first piece.
                                     </td>
                                 </tr>
                             @endforelse
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </x-layouts.app>
