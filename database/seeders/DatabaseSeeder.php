@@ -32,12 +32,22 @@ class DatabaseSeeder extends Seeder
         });
 
         $products = [
-            ['name' => 'Luna Shell Blanket', 'price' => 4200, 'stock' => 7, 'category' => 'Cozy Throws', 'material' => 'Merino blend', 'description' => 'Starburst stitch blanket in lavender gradients'],
-            ['name' => 'Aurora Bunny Plush', 'price' => 1500, 'stock' => 15, 'category' => 'Amigurumi Friends', 'material' => 'Cotton acrylic', 'description' => 'Pastel bunny with removable scarf'],
+            ['name' => 'Luna Shell Blanket', 'price' => 4200, 'stock' => 7, 'category' => 'Cozy Throws', 'material' => 'Merino wool', 'description' => 'Starburst stitch blanket in lavender gradients'],
+            ['name' => 'Aurora Bunny Plush', 'price' => 1500, 'stock' => 15, 'category' => 'Amigurumi Friends', 'material' => 'Cotton acrylic mix', 'description' => 'Pastel bunny with removable scarf'],
             ['name' => 'Driftwood Basket Set', 'price' => 2800, 'stock' => 5, 'category' => 'Home Accents', 'material' => 'Jute cotton mix', 'description' => 'Nested storage baskets with leather tabs'],
             ['name' => 'Solstice Bandana', 'price' => 950, 'stock' => 18, 'category' => 'Wearables', 'material' => 'Mercerized cotton', 'description' => 'Tri-tone granny bandana with tassels'],
             ['name' => 'Petal Bloom Beanie', 'price' => 1200, 'stock' => 10, 'category' => 'Wearables', 'material' => 'Alpaca wool', 'description' => 'Double-layered beanie with faux-fur pom'],
             ['name' => 'Cloudlet Baby Rattle', 'price' => 800, 'stock' => 20, 'category' => 'Baby Keepsakes', 'material' => 'Organic cotton', 'description' => 'Soft rattle with wooden grip ring'],
+            ['name' => 'Stardust Scarf', 'price' => 1100, 'stock' => 12, 'category' => 'Wearables', 'material' => 'Acrylic yarn', 'description' => 'Sparkly infinity scarf with fringe ends'],
+            ['name' => 'Moonlight Amigurumi Bear', 'price' => 1800, 'stock' => 8, 'category' => 'Amigurumi Friends', 'material' => 'Chenille yarn', 'description' => 'Soft teddy bear with embroidered eyes'],
+            ['name' => 'Coastal Throw Pillow', 'price' => 1600, 'stock' => 14, 'category' => 'Home Accents', 'material' => 'Cotton yarn', 'description' => 'Textured pillow cover in ocean blues'],
+            ['name' => 'Sunrise Baby Blanket', 'price' => 3500, 'stock' => 6, 'category' => 'Baby Keepsakes', 'material' => 'Bamboo yarn', 'description' => 'Ultra-soft blanket in warm sunrise colors'],
+            ['name' => 'Twilight Shawl', 'price' => 2200, 'stock' => 9, 'category' => 'Wearables', 'material' => 'Silk blend', 'description' => 'Elegant triangular shawl with delicate lace pattern'],
+            ['name' => 'Forest Friend Fox', 'price' => 1900, 'stock' => 11, 'category' => 'Amigurumi Friends', 'material' => 'Wool yarn', 'description' => 'Adorable fox with bushy tail and button eyes'],
+            ['name' => 'Garden Planter Cozy', 'price' => 750, 'stock' => 22, 'category' => 'Home Accents', 'material' => 'Cotton yarn', 'description' => 'Decorative cover for plant pots in earthy tones'],
+            ['name' => 'Cozy Cabin Throw', 'price' => 3800, 'stock' => 8, 'category' => 'Cozy Throws', 'material' => 'Wool yarn', 'description' => 'Chunky cable-knit blanket perfect for winter nights'],
+            ['name' => 'Ocean Wave Coasters', 'price' => 650, 'stock' => 25, 'category' => 'Home Accents', 'material' => 'Cotton yarn', 'description' => 'Set of four coasters with wave pattern'],
+            ['name' => 'Sweet Dreams Baby Mobile', 'price' => 2400, 'stock' => 7, 'category' => 'Baby Keepsakes', 'material' => 'Acrylic yarn', 'description' => 'Colorful mobile with stars and moons'],
         ];
 
         foreach ($products as $product) {

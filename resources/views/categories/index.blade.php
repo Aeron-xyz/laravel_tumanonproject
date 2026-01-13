@@ -49,11 +49,6 @@
                         @error('name','createCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
                     </div>
                     <div class="space-y-2">
-                        <label class="text-sm text-white/70">Accent color (hex)</label>
-                        <input type="text" name="color" value="{{ old('color') }}" placeholder="#a855f7" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-fuchsia-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/40">
-                        @error('color','createCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
-                    </div>
-                    <div class="space-y-2">
                         <label class="text-sm text-white/70">Description</label>
                         <textarea name="description" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-fuchsia-300 focus:outline-none focus:ring-2 focus:ring-fuchsia-400/40">{{ old('description') }}</textarea>
                         @error('description','createCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
@@ -87,10 +82,7 @@
                             @forelse($categories as $category)
                                 <tr class="transition hover:bg-white/5">
                                     <td class="px-4 py-4 font-semibold">
-                                        <div class="flex items-center gap-3">
-                                            <span class="h-3 w-3 rounded-full" style="background: {{ $category->color ?? '#c084fc' }}"></span>
-                                            <span>{{ $category->name }}</span>
-                                        </div>
+                                        {{ $category->name }}
                                     </td>
                                     <td class="px-4 py-4 text-white/70">{{ $category->description ?? '—' }}</td>
                                     <td class="px-4 py-4">
@@ -118,11 +110,6 @@
                                                             @error('name','updateCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
                                                         </div>
                                                         <div class="space-y-2">
-                                                            <label class="text-sm text-white/70">Accent color</label>
-                                                            <input type="text" name="color" value="{{ $category->color }}" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">
-                                                            @error('color','updateCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
-                                                        </div>
-                                                        <div class="space-y-2">
                                                             <label class="text-sm text-white/70">Description</label>
                                                             <textarea name="description" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#16022d]/70 px-4 py-3 text-sm text-white">{{ $category->description }}</textarea>
                                                             @error('description','updateCategory')<p class="text-xs text-rose-300">{{ $message }}</p>@enderror
@@ -141,7 +128,7 @@
                                                     <p class="mt-2 text-sm text-white/70">Works will stay available but their collection becomes N/A.</p>
                                                     <div class="mt-6 flex items-center justify-center gap-3">
                                                         <button type="button" @click="openDelete = false" class="rounded-2xl border border-white/10 px-4 py-2 text-sm text-white/70">Cancel</button>
-                                                        <form action="{{ route('categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Delete this collection?')">
+                                                        <form action="{{ route('categories.destroy', $category) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="rounded-2xl bg-gradient-to-r from-rose-500 to-orange-500 px-6 py-2 text-sm font-semibold text-white">
