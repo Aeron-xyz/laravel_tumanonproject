@@ -16,6 +16,7 @@
                     <flux:navlist.group class="grid gap-2">
                         <flux:navlist.item class="rounded-2xl bg-white/10 text-white" icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                         <flux:navlist.item class="rounded-2xl bg-white/5 text-white" icon="layout-grid" :href="route('categories.index')" :current="request()->routeIs('categories.*')" wire:navigate>{{ __('Collections') }}</flux:navlist.item>
+                        <flux:navlist.item class="rounded-2xl bg-white/5 text-white" icon="trash" :href="route('trash.index')" :current="request()->routeIs('trash.*')" wire:navigate>{{ __('Trash') }}</flux:navlist.item>
                     </flux:navlist.group>
                 </flux:navlist>
 
