@@ -16,6 +16,7 @@ class CrochetWorksSeeder extends Seeder
      */
     public function run(): void
     {
+<<<<<<< HEAD
         // Get or create categories
         $cozyThrows = Category::firstOrCreate(
             ['name' => 'Cozy Throws'],
@@ -188,6 +189,64 @@ class CrochetWorksSeeder extends Seeder
                 'description' => 'Elegant floral mandala pillow with soft pastel colors. Features intricate crochet work with shell stitches and decorative borders, perfect for adding charm to any room.',
                 'category_id' => $homeAccents->id,
                 'image_color' => 'f472b6', // Pink
+=======
+        // Get or create a category
+        $category = Category::first();
+        if (!$category) {
+            $category = Category::create([
+                'name' => 'Blankets',
+                'color' => '#c084fc',
+                'description' => 'Cozy crochet blankets',
+            ]);
+        }
+
+        // Sample crochet works data
+        $crochetWorks = [
+            [
+                'name' => 'Starlight Shell Blanket',
+                'price' => 950.00,
+                'stock' => 23,
+                'material' => 'Acrylic yarn',
+                'description' => 'A beautiful shell stitch blanket in soft pastel colors. Perfect for cozy evenings.',
+                'category_id' => $category->id,
+                'image_color' => 'c084fc', // Purple
+            ],
+            [
+                'name' => 'Vibrant Granny Square',
+                'price' => 1200.00,
+                'stock' => 10,
+                'material' => 'Cotton yarn',
+                'description' => 'Vibrant granny square blanket with rainbow colors. Handmade with love.',
+                'category_id' => $category->id,
+                'image_color' => 'f472b6', // Pink
+            ],
+            [
+                'name' => 'Elegant Cable Throw',
+                'price' => 800.00,
+                'stock' => 12,
+                'material' => 'Wool yarn',
+                'description' => 'Elegant cable stitch throw blanket. Warm and luxurious.',
+                'category_id' => $category->id,
+                'image_color' => '38bdf8', // Blue
+            ],
+            [
+                'name' => 'Decorative Mandala Pillow',
+                'price' => 650.00,
+                'stock' => 18,
+                'material' => 'Cotton acrylic mix',
+                'description' => 'Decorative mandala pillow cover with floral patterns. Adds charm to any room.',
+                'category_id' => $category->id,
+                'image_color' => 'f97316', // Orange
+            ],
+            [
+                'name' => 'Soft Ripple Baby Blanket',
+                'price' => 750.00,
+                'stock' => 15,
+                'material' => 'Organic cotton',
+                'description' => 'Soft ripple stitch baby blanket. Gentle on sensitive skin.',
+                'category_id' => $category->id,
+                'image_color' => 'ec4899', // Rose
+>>>>>>> 13a409426445f79a5f57cf932bfc60ef8031adf1
             ],
         ];
 
